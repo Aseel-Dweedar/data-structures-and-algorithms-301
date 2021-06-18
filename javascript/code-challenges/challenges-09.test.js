@@ -8,15 +8,15 @@ using the 'reduce' method.
 
 E.g. [4,2,7,5,9,2] -> 9
 ------------------------------------------------------------------------------------------------ */
-const maxInArray = (arr) => {
-    // Solution code here...
-    let maxValue = arr.reduce((acc, currentValue) => {
-        if (acc > currentValue) {
-            return acc;
-        } else {
-            return currentValue;
+const findMax = (matrix) => {
+    let maxValue = 0;
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            if (matrix[i][j] > maxValue) {
+                maxValue = matrix[i][j];
+            }
         }
-    }, 0);
+    }
     return maxValue;
 };
 
