@@ -140,12 +140,9 @@ const characters = [{
 ];
 
 const getHouses = (arr) => {
-    let houses = [];
     // Solution code here...
-    arr.forEach((value) => {
-        houses.push(value.house);
-    });
-    return houses;
+    let newArr = arr.map((value) => value.house);
+    return newArr;
 };
 
 /*------------------------------------------------------------------------------------------------
