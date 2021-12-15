@@ -132,7 +132,7 @@ const getStatName = (arr, minBaseStat) => {
     let newArr = arr
         .filter((value) => {
             if (value.baseStat > minBaseStat) {
-                return value.stat.name;
+                return value;
             }
         })
         .map((value) => value.stat.name);
@@ -189,11 +189,7 @@ const characters = [{
 
 const getCharactersWithoutChildren = (arr) => {
     // Solution code here...
-    let newArr = arr.filter((value) => {
-        if (!("children" in value)) {
-            return value;
-        }
-    });
+    let newArr = arr.filter((value) => !value.children);
     return newArr;
 };
 
@@ -207,19 +203,16 @@ For example: evenOddNumericValues(['Gregor', 2, 4, 1]) returns ['even', 'even', 
 
 const evenOddNumericValues = (arr) => {
     // Solution code here...
-    let newArr = arr.filter((value) => {
-        if (value === parseInt(value, 10)) {
-            return value;
-        }
-    });
-    let oddEven = newArr.map((value) => {
-        if (value % 2 === 0) {
-            return "even";
-        } else {
-            return "odd";
-        }
-    });
-    return oddEven;
+    let newArr = arr
+        .filter((value) => typeof value == "number")
+        .map((value) => {
+            if (value % 2 == 0) {
+                return "even";
+            } else {
+                return "odd";
+            }
+        });
+    return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------

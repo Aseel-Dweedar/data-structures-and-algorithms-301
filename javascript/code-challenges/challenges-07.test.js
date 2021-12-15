@@ -68,12 +68,8 @@ For example, if the input is 'Welcome', the output will be:
 const howMuchPencil = (str) => {
     let result = [];
     // Solution code here...
-    result.push(str);
-    let newString = str.split("");
-    for (let index = 0; index < str.length; index++) {
-        newString = newString.slice(1, newString.length).join("");
-        result.push(newString);
-        newString = newString.split("");
+    for (let i = 0; i <= str.length; i++) {
+        result.push(str.slice(i));
     }
     return result;
 };
@@ -208,6 +204,10 @@ removeLastCharacters('Gregor', 9) returns ''
 
 const removeLastCharacters = (str, numberOfCharacters) => {
     // Solution code here...
+    if (numberOfCharacters > 0) {
+        str = str.slice(0, -numberOfCharacters);
+    }
+    return str;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -232,6 +232,8 @@ For example, removeVowels('gregor') returns 'grgr'.
 
 const removeVowels = (str) => {
     // Solution code here...
+    let newStr = str.replace(/o|e|a|i|u/gi, "");
+    return newStr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -394,7 +396,7 @@ xdescribe("Testing challenge 9", () => {
     });
 });
 
-xdescribe("Testing challenge 10", () => {
+describe("Testing challenge 10", () => {
     test("It should shorten the string based on the first argument", () => {
         expect(removeLastCharacters("Gregor", 2)).toStrictEqual("Greg");
         expect(removeLastCharacters("Gregor", 2).length).toStrictEqual(4);
@@ -417,7 +419,7 @@ xdescribe("Testing challenge 11", () => {
     });
 });
 
-xdescribe("Testing challenge 12", () => {
+describe("Testing challenge 12", () => {
     test("It should return the string without vowels", () => {
         expect(removeVowels("gregor")).toStrictEqual("grgr");
         expect(removeVowels("gregor").length).toStrictEqual(4);

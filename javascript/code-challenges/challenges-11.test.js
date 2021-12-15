@@ -38,16 +38,12 @@ For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 
 const count = (target, input) => {
     // Solution code here...
-    let newArr = [];
-    for (let i = 0; i < input.length; i++) {
-        newArr = [...newArr, ...input[i]];
-    }
-    let total = newArr.filter((value) => {
-        if (value === target) {
-            return value;
-        }
-    });
-    let count = total.length;
+    let count = input.reduce((acc, curr) => {
+        curr.forEach((element) => {
+            if (element === target) acc++;
+        });
+        return acc;
+    }, 0);
     return count;
 };
 

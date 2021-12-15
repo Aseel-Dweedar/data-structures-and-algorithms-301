@@ -28,8 +28,8 @@ Write a function named addValues that, given an array of numbers as input, uses 
 
 const addValues = (arr) => {
     // Solution code here...
-    let sum = arr.reduce((acc, current) => {
-        return (acc += current);
+    const sum = arr.reduce((pre, curr) => {
+        return (pre += curr);
     }, 0);
     return sum;
 };
@@ -147,11 +147,10 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 
 const reversedString = (str) => {
     // Solution code here...
-    let splittedArr = str.split("");
-    let newString = splittedArr.reduce((acc, current) => {
-        return (current += acc);
+    let newStr = str.split("").reduce((acc, curr) => {
+        return (curr += acc);
     }, "");
-    return newString;
+    return newStr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -204,6 +203,14 @@ const characters = [{
 
 const countNumberOfChildren = (arr) => {
     // Solution code here...
+    let count = arr.reduce((acc, curr) => {
+        if (curr.children) {
+            return (acc += curr.children.length);
+        } else {
+            return (acc += 0);
+        }
+    }, 0);
+    return count;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -237,6 +244,14 @@ const isPrime = (value) => {
 
 const countPrimeNumbers = (arr) => {
     // Solution code here...
+    let newArr = arr.reduce((acc, curr) => {
+        if (isPrime(curr)) {
+            return acc + 1;
+        } else {
+            return acc;
+        }
+    }, 0);
+    return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -279,6 +294,14 @@ const snorlaxData = {
 
 const extractStat = (statName, arr) => {
     // Solution code here...
+    let newStr = arr.reduce((acc, curr) => {
+        if (curr.stat.name === statName) {
+            return curr;
+        } else {
+            return acc;
+        }
+    }, {});
+    return newStr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -361,7 +384,7 @@ describe("Testing challenge 6", () => {
     });
 });
 
-xdescribe("Testing challenge 7", () => {
+describe("Testing challenge 7", () => {
     test("It should return the total number of children", () => {
         expect(countNumberOfChildren(characters)).toStrictEqual(14);
     });
@@ -373,13 +396,13 @@ xdescribe("Testing challenge 8", () => {
     });
 });
 
-xdescribe("Testing challenge 9", () => {
+describe("Testing challenge 9", () => {
     test("It should return a count of the prime numbers in the array", () => {
         expect(countPrimeNumbers([1, 2, 13, 64, 45, 56, 17, 8])).toStrictEqual(3);
     });
 });
 
-xdescribe("Testing challenge 10", () => {
+describe("Testing challenge 10", () => {
     test("It should return any stats that match the input", () => {
         expect(extractStat("speed", snorlaxData.stats)).toStrictEqual({
             stat: { url: "https://pokeapi.co/api/v2/stat/6/", name: "speed" },

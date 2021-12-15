@@ -7,17 +7,16 @@ Write a function named longestString that takes in an array of strings and retur
 ------------------------------------------------------------------------------------------------ */
 
 const longestString = (arr) => {
-    if (arr.length === 0) {
+    if (arr.length == 0) {
         return -1;
     }
-    // Solution code here...
-    let longestStringIndx = 0;
-    arr.forEach((element, indx) => {
-        if (element.length >= arr[longestStringIndx].length) {
-            longestStringIndx = indx;
+    let idx = 0;
+    arr.forEach((value) => {
+        if (value.length > arr[idx].length) {
+            idx = arr.indexOf(value);
         }
     });
-    return longestStringIndx;
+    return idx;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -30,9 +29,8 @@ For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['t', 
 
 const firstLetters = (arr) => {
     // Solution code here...
-    return arr.map((value) => {
-        return value.substring(0, 1);
-    });
+    let newArr = arr.map((value) => value[0]);
+    return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -45,9 +43,7 @@ For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['this
 
 const findHappiness = (arr) => {
     // Solution code here...
-    return arr.filter((value) => {
-        return value.includes(":)");
-    });
+    return arr.filter((value) => value.includes(":)"));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -75,14 +71,11 @@ For example, 'abcdefg' returns 'bdf'
 ------------------------------------------------------------------------------------------------ */
 
 const onlyOddChars = (str) => {
-    let newStr = str.split("");
-    return newStr
-        .filter((value) => {
-            if (newStr.indexOf(value) % 2 !== 0) {
-                return value;
-            }
-        })
-        .join("");
+    let newStr = "";
+    for (let i = 0; i < str.length; i++) {
+        if (i % 2 != 0) newStr += str[i];
+    }
+    return newStr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -93,16 +86,10 @@ Write a function named allHappy that takes in an array of strings and returns a 
 
 const allHappy = (arr) => {
     // Solution code here...
-    let test = true;
     for (let i = 0; i < arr.length; i++) {
-        if (arr[i].includes(":)")) {
-            test = true;
-        } else {
-            test = false;
-            break;
-        }
+        if (!arr[i].includes(":)")) return false;
     }
-    return test;
+    return true;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -139,6 +126,9 @@ For example, [['Brook Testing', 'Actual Person'], ['Human Person', 'Brook again'
 
 const unenrollBrook = (arr) => {
     // Solution code here...
+    return arr.map((value) =>
+        value.filter((value2) => !value2.includes("Brook"))
+    );
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -186,6 +176,11 @@ For example, ['abcd', 'efgh', 'ijkl', 'mnop'] returns ['a', 'f', 'k', 'p']
 
 const characterByIndex = (arr) => {
     // Solution code here...
+    let newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        newArr.push(arr[i][i]);
+    }
+    return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -329,7 +324,7 @@ xdescribe("Testing challenge 8", () => {
     });
 });
 
-xdescribe("Testing challenge 9", () => {
+describe("Testing challenge 9", () => {
     test("It should remove Brook from all courses", () => {
         const roster = [
             ["Michelle", "Allie", "Brook TESTING"],
@@ -407,7 +402,7 @@ xdescribe("Testing challenge 10", () => {
     });
 });
 
-xdescribe("Testing challenge 11", () => {
+describe("Testing challenge 11", () => {
     test("It should return the ith character of the ith string", () => {
         const words = ["apple", "banana", "cantaloupe"];
 
